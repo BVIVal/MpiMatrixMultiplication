@@ -1,7 +1,8 @@
 #include "InputUtilities.h"
 
-using namespace std;
 
+
+//ToDo: normal description
 int GetIntValue(ifstream& stream) {
 	int value;
 	stream.read(reinterpret_cast<char*>(&value), 4);
@@ -9,29 +10,7 @@ int GetIntValue(ifstream& stream) {
 	return value;
 }
 
-/**
- * Creating full-path to the object using project-path.
- *
- * @param dataFileName (string) - name of the file or relative-path to the object.
- * @return filePath (string) - path in project folder to the object.
- */
-string DataFilePath(string dataFileName) {
-	char szPath[0x100];
-	GetModuleFileNameA(NULL, szPath, sizeof(szPath));
-	string filePath = szPath;
-	filePath = filePath.substr(0, filePath.find_last_of("\\"));
-	filePath += "\\Data\\";
-	return filePath += dataFileName;
-}
 
-ifstream FileOpenDat(string dataFilePath) {
-	ifstream binaryFile;
-	binaryFile.open(dataFilePath, std::fstream::binary);
-	if (!binaryFile.is_open()) {
-		printf("File is not exists");
-	}
-	return binaryFile;
-}
 
 //ToDo: How to do generic?!
 vector<vector<double>> GetMatrixOfDoubles(ifstream& binaryFile, int& i, int& j, int varType = sizeof(double)) {
@@ -56,13 +35,32 @@ vector<vector<double>> GetMatrixOfDoubles(ifstream& binaryFile, int& i, int& j, 
 	return {};
 }
 
+//ToDo: Do I have to replace this function into 'FileUtilities' and make a link to 'MatrixClass'?
 MatrixClass FromFile(string fileName) {
 
-	ifstream binaryFile = FileOpenDat(DataFilePath(fileName));
+	ifstream binaryFile = GetReadStream(GetFilePath(fileName, "\\Data\\"));
 	if (!binaryFile.is_open()) return MatrixClass().CreateEmptyMatrixClass();
 
 	int i = GetIntValue(binaryFile);
 	int j = GetIntValue(binaryFile);
 
 	return MatrixClass(i, j, GetMatrixOfDoubles(binaryFile, i, j));
+}
+
+/**
+ * @brief
+Create new vector<uint32_t> of indexes, using process-rank, max value of vector, and common number of using processes;
+ *
+@param taskId - process rank;
+@param vectorSize - max value of vector;
+@param commSize - the number of involved processes;
+ *
+ * @return
+ * New vector<uint32_t>;
+ */
+vector<uint32_t> GetVectorById(int taskId, int vectorSize, int commSize)
+{
+	vector<uint32_t> newVector;
+	for (int i = taskId; i < vectorSize; i = i + commSize) newVector.push_back(i);
+	return newVector;
 }
