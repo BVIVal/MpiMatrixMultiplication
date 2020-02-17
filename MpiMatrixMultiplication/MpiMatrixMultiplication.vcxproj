@@ -44,7 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseMpiLibrary>MPICH2</UseMpiLibrary>
+    <UseMpiLibrary>INTELMPI</UseMpiLibrary>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -73,17 +73,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>E:\Val-ly_PC\Visual Studio\Visual Studio 2019\MpiMatrixMultiplication\Mpich2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Val-ly_PC\Visual Studio\Visual Studio 2019\MpiMatrixMultiplication\Mpich2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files\Microsoft HPC Pack 2008 SDK\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\Microsoft HPC Pack 2008 SDK\Lib\amd64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft SDKs\MPI\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft SDKs\MPI\Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -93,10 +97,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\Val-ly_PC\Visual Studio\Visual Studio 2019\MpiMatrixMultiplication\Mpich2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>cxx.lib;mpi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\Val-ly_PC\Visual Studio\Visual Studio 2019\MpiMatrixMultiplication\Mpich2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -150,20 +157,27 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>msmpi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MpiMatrixMultiplication.cpp" />
+    <ClCompile Include="Utilities\FileUtilities.cpp" />
     <ClCompile Include="Utilities\InputUtilities.cpp" />
     <ClCompile Include="Utilities\MatrixUtilitiescpp.cpp" />
+    <ClCompile Include="Utilities\MpiUtilities.cpp" />
+    <ClCompile Include="Utilities\StringUtilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\EntryMatrixDouble1.dat" />
     <None Include="Data\EntryMatrixDouble2.dat" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Utilities\FileUtilities.h" />
     <ClInclude Include="Utilities\InputUtilities.h" />
     <ClInclude Include="Utilities\MatrixUtilities.h" />
+    <ClInclude Include="Utilities\MpiUtilities.h" />
+    <ClInclude Include="Utilities\StringUtilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

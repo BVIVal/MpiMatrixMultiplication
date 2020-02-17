@@ -33,6 +33,15 @@
     <ClCompile Include="Utilities\MatrixUtilitiescpp.cpp">
       <Filter>Исходные файлы\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities\FileUtilities.cpp">
+      <Filter>Исходные файлы\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\StringUtilities.cpp">
+      <Filter>Исходные файлы\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\MpiUtilities.cpp">
+      <Filter>Исходные файлы\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\EntryMatrixDouble1.dat">
@@ -47,6 +56,15 @@
       <Filter>Файлы заголовков\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\MatrixUtilities.h">
+      <Filter>Файлы заголовков\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\FileUtilities.h">
+      <Filter>Файлы заголовков\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\StringUtilities.h">
+      <Filter>Файлы заголовков\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\MpiUtilities.h">
       <Filter>Файлы заголовков\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
