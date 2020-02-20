@@ -27,7 +27,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -162,9 +162,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MpiMatrixMultiplication.cpp" />
+    <ClCompile Include="Utilities\ComputeUtilities.cpp" />
     <ClCompile Include="Utilities\FileUtilities.cpp" />
     <ClCompile Include="Utilities\InputUtilities.cpp" />
-    <ClCompile Include="Utilities\MatrixUtilitiescpp.cpp" />
+    <ClCompile Include="Utilities\MatrixUtilities.cpp" />
     <ClCompile Include="Utilities\MpiUtilities.cpp" />
     <ClCompile Include="Utilities\StringUtilities.cpp" />
   </ItemGroup>
@@ -173,6 +174,7 @@
     <None Include="Data\EntryMatrixDouble2.dat" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Utilities\ComputeUtilities.h" />
     <ClInclude Include="Utilities\FileUtilities.h" />
     <ClInclude Include="Utilities\InputUtilities.h" />
     <ClInclude Include="Utilities\MatrixUtilities.h" />

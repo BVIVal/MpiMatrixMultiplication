@@ -30,9 +30,6 @@
     <ClCompile Include="Utilities\InputUtilities.cpp">
       <Filter>Исходные файлы\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\MatrixUtilitiescpp.cpp">
-      <Filter>Исходные файлы\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Utilities\FileUtilities.cpp">
       <Filter>Исходные файлы\Utilities</Filter>
     </ClCompile>
@@ -40,6 +37,12 @@
       <Filter>Исходные файлы\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Utilities\MpiUtilities.cpp">
+      <Filter>Исходные файлы\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\ComputeUtilities.cpp">
+      <Filter>Исходные файлы\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\MatrixUtilities.cpp">
       <Filter>Исходные файлы\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,6 +68,9 @@
       <Filter>Файлы заголовков\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\MpiUtilities.h">
+      <Filter>Файлы заголовков\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\ComputeUtilities.h">
       <Filter>Файлы заголовков\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
