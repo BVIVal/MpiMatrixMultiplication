@@ -23,9 +23,21 @@ public:
 
 #pragma region Constructors
 
-	MatrixClass(int i, int j, vector<vector<double>> matrix);
 
-	MatrixClass();
+	MatrixClass(int i, int j, vector<vector<double>> matrix) : _i(i), _j(j), _matrix(matrix)
+	{
+	}
+
+	MatrixClass()
+	{
+		this->_i = -1;
+		this->_j = -1;
+		this->_matrix = {};
+	}
+	
+	//MatrixClass(int i, int j, vector<vector<double>> matrix);
+
+	//MatrixClass();
 
 #pragma endregion
 
@@ -43,11 +55,17 @@ public:
 
 	void PushRow(vector<double> value);
 
-	int GetI();
+	int GetDemensionI();
 
-	int GetJ();
+	int GetDemensionJ();
+	
+	vector<vector<double>> GetMatrixAll();
 
+	bool IsMatrixClassEmtpy(MatrixClass matrixClass);
+	
 	MatrixClass CreateEmptyMatrixClass();
+
+	static MatrixClass Transpose(MatrixClass data);
 
 };
 
