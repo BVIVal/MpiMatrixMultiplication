@@ -78,14 +78,22 @@ bool TryWriteToFile(ofstream* file, const vector<uint32_t>& values)
  * @param fileName (string) - name of the file or relative-path to the object.
  * @return filePath (string) - path in project folder to the object.
  */
-string GetFilePath(const string& fileName, string subFolder = "")
+string GetFileApplicationPath(const string& fileName, string subFolder = "")
 {
 	char szPath[0x100];
 	GetModuleFileNameA(NULL, szPath, sizeof(szPath));
 	string filePath = szPath;
 	filePath = filePath.substr(0, filePath.find_last_of("\\"));
-	filePath += subFolder;
-	return filePath += fileName;
+	if(subFolder != "") filePath += "\\" + subFolder;
+	return filePath += "\\" + fileName;
+}
+
+string GetFilePath(const string& path, const string& fileName, const string subFolder = "")
+{
+	string filePath = ToRawStringPath(path);
+	if (subFolder == "") return filePath += "\\" + fileName;
+	filePath += "\\" + subFolder;
+	return filePath += "\\" + fileName;
 }
 
 ifstream GetReadStream(const string& filePath)
@@ -93,7 +101,8 @@ ifstream GetReadStream(const string& filePath)
 	ifstream binaryFile;
 	binaryFile.open(filePath, fstream::binary);
 	if (!binaryFile.is_open()) {
-		throw "GetReadStream: File does not exists";
+		//throw exception("GetReadStream: File does not exist");
+		throw runtime_error("GetReadStream: File does not exist");
 	}
 	return binaryFile;
 }

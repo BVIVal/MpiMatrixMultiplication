@@ -1,7 +1,6 @@
 #include "InputUtilities.h"
 
 
-
 //ToDo: normal description
 int GetIntValue(ifstream& stream) {
 	int value;
@@ -36,9 +35,49 @@ vector<vector<double>> GetMatrixOfDoubles(ifstream& binaryFile, int& i, int& j, 
 }
 
 //ToDo: Do I have to replace this function into 'FileUtilities' and make a link to 'MatrixClass'?
-MatrixClass FromFile(string fileName) {
+MatrixClass FromApplicationFolderFile(const string& fileName, const string& subFolder = "")
+{
+	ifstream binaryFile;
+	try
+	{
+		binaryFile = GetReadStream(GetFileApplicationPath(fileName, subFolder));
+	}
+	catch(const runtime_error& e)
+	{
+		cout << e.what();
+		return MatrixClass();
+	}
+	catch(...)
+	{
+		throw runtime_error("Unknown error in FromApplicationFolderFile");
+	}
+	
+	if (!binaryFile.is_open()) return MatrixClass().CreateEmptyMatrixClass();
 
-	ifstream binaryFile = GetReadStream(GetFilePath(fileName, "\\Data\\"));
+	int i = GetIntValue(binaryFile);
+	int j = GetIntValue(binaryFile);
+
+	return MatrixClass(i, j, GetMatrixOfDoubles(binaryFile, i, j));
+}
+
+//ToDo: Do I have to replace this function into 'FileUtilities' and make a link to 'MatrixClass'?
+MatrixClass FromFile(const string& path, const string& fileName, const string& subFolder = "")
+{
+	ifstream binaryFile;
+	try
+	{
+		binaryFile = GetReadStream(GetFilePath(path, fileName, subFolder));
+	}
+	catch (const runtime_error& e)
+	{
+		cout << e.what();
+		return MatrixClass();
+	}
+	catch (...)
+	{
+		throw runtime_error("Unknown error in FromFile");
+	}
+	
 	if (!binaryFile.is_open()) return MatrixClass().CreateEmptyMatrixClass();
 
 	int i = GetIntValue(binaryFile);
@@ -64,3 +103,5 @@ vector<uint32_t> GetVectorById(int taskId, int vectorSize, int commSize)
 	for (int i = taskId; i < vectorSize; i = i + commSize) newVector.push_back(i);
 	return newVector;
 }
+
+

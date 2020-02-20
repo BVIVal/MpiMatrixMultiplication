@@ -13,7 +13,8 @@ using namespace std;
 
 int GetIntValue(ifstream& stream);
 vector<vector<double>> GetMatrixOfDoubles(ifstream& binaryFile, int& i, int& j, int varType);
-MatrixClass FromFile(string fileName);
+MatrixClass FromApplicationFolderFile(const string& fileName, const string& subFolder);
+MatrixClass FromFile(const string& path, const string& fileName, const string& subFolder);
 vector<uint32_t> GetVectorById(int taskId, int vectorSize, int commSize);
 
 #endif
