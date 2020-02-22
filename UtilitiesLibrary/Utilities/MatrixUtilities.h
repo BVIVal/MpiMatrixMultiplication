@@ -12,32 +12,22 @@ class MatrixClass
 private:
 
 #pragma region Fields
-	
+
 	int _i;
 	int _j;
 	vector<vector<double>> _matrix;
 
 #pragma endregion
-	
+
 public:
 
 #pragma region Constructors
 
+	MatrixClass(int i, int j, vector<vector<double>> matrix);
 
-	MatrixClass(int i, int j, vector<vector<double>> matrix) : _i(i), _j(j), _matrix(matrix)
-	{
-	}
+	MatrixClass(int i, int j);
 
-	MatrixClass()
-	{
-		this->_i = -1;
-		this->_j = -1;
-		this->_matrix = {};
-	}
-	
-	//MatrixClass(int i, int j, vector<vector<double>> matrix);
-
-	//MatrixClass();
+	MatrixClass();
 
 #pragma endregion
 
@@ -58,11 +48,11 @@ public:
 	int GetDemensionI();
 
 	int GetDemensionJ();
-	
+
 	vector<vector<double>> GetMatrixAll();
 
 	bool IsMatrixClassEmtpy(MatrixClass matrixClass);
-	
+
 	MatrixClass CreateEmptyMatrixClass();
 
 	static MatrixClass Transpose(MatrixClass data);

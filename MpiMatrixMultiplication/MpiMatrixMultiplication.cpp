@@ -142,10 +142,8 @@
 #include <iostream>
 #include "mpi.h"
 #include <fstream>
-#include "Utilities/StringUtilities.h"
-#include "Utilities/FileUtilities.h"
-#include "Utilities/InputUtilities.h"
-#include "Utilities/MpiUtilities.h"
+#include "MatrixUtilities.h"
+#include "ComputeUtilities.h"
 
 using namespace std;
 
@@ -158,8 +156,8 @@ int main(int argc, char** argv)
 	MPI_Comm_rank(MPI_COMM_WORLD, &taskId);
 	auto vectorSize = 5;
 
-	MatrixClass matrix1 = FromApplicationFolderFile(FILE_NAME1, "\\Data\\");
-	MatrixClass matrix2 = FromApplicationFolderFile(FILE_NAME2, "\\Data\\");
+	MatrixClass matrix1 = FromFile(RESULT_FILE_PATH, FILE_NAME1, "Data");
+	MatrixClass matrix2 = FromFile(RESULT_FILE_PATH, FILE_NAME2, "Data");
 	//ToDo: checking on 2x3 & 3x2 - only calculate 500x500 or 2x2 (square matrices)
 	/*if (taskId == 0)
 	{
@@ -184,7 +182,7 @@ int main(int argc, char** argv)
 		else if (taskId == 1)
 		{
 			MPI_Recv(&jk[0], 10, MPI_INT, 0, 99, MPI_COMM_WORLD, &status1);
-			ofstream File(R"(C:\Users\Public\Pictures\TestReceive)");
+			ofstream File(R"(C:\Users\Public\Pictures\TestReceive.txt)");
 			if (File.is_open())
 			{
 				for (int element : jk)

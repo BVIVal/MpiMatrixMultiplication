@@ -91,8 +91,7 @@ string GetFileApplicationPath(const string& fileName, string subFolder = "")
 string GetFilePath(const string& path, const string& fileName, const string subFolder = "")
 {
 	string filePath = ToRawStringPath(path);
-	if (subFolder == "") return filePath += "\\" + fileName;
-	filePath += "\\" + subFolder;
+	if (subFolder != "") filePath += "\\" + subFolder;
 	return filePath += "\\" + fileName;
 }
 

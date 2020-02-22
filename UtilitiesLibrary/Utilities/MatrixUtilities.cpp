@@ -1,18 +1,22 @@
-#include "pch.h"
 #include "MatrixUtilities.h"
 
 #pragma region Constructor
 
-//MatrixClass::MatrixClass(int i, int j, vector<vector<double>> matrix) : _i(i), _j(j), _matrix(matrix)
-//{
-//}
-//
-//MatrixClass::MatrixClass()
-//{
-//	this->_i = -1;
-//	this->_j = -1;
-//	this->_matrix = {};
-//}
+//ToDo: _i = _matrix.size(); _j = _matrix[0].size();
+MatrixClass::MatrixClass(int i, int j, vector<vector<double>> matrix) : _i(i), _j(j), _matrix(matrix)
+{
+}
+
+MatrixClass::MatrixClass(int i, int j) : _i(i), _j(j), _matrix(vector<vector<double>>(i, vector<double>(j)))
+{
+}
+
+MatrixClass::MatrixClass()
+{
+	this->_i = -1;
+	this->_j = -1;
+	this->_matrix = {};
+}
 
 #pragma endregion
 
@@ -71,7 +75,7 @@ MatrixClass MatrixClass::CreateEmptyMatrixClass()
 bool MatrixClass::IsMatrixClassEmtpy(MatrixClass matrixClass)
 {
 	const vector<vector<double>> emtpyVector = {};
-	if ((matrixClass.GetDemensionI() <= 0 && matrixClass.GetDemensionJ() <= 0) 
+	if ((matrixClass.GetDemensionI() <= 0 && matrixClass.GetDemensionJ() <= 0)
 		|| matrixClass.GetMatrixAll() == emtpyVector) return true;
 	return false;
 }
@@ -81,7 +85,7 @@ MatrixClass MatrixClass::Transpose(MatrixClass data)
 	vector<vector<double>> result(data.GetDemensionJ(), vector<double>(data.GetDemensionI()));
 
 	for (int i = 0; i < data.GetDemensionI(); i++)
-		for (int j = 0; j < data.GetDemensionJ(); j++) 
+		for (int j = 0; j < data.GetDemensionJ(); j++)
 		{
 			result[j][i] = data.Get(i, j);
 		}
@@ -89,3 +93,15 @@ MatrixClass MatrixClass::Transpose(MatrixClass data)
 	return MatrixClass(data.GetDemensionJ(), data.GetDemensionI(), result);
 }
 
+//MatrixClass MatrixClass::MatrixConcotonateByCommSize(MatrixClass data)
+//{
+//	vector<vector<double>> result(data.GetDemensionJ(), vector<double>(data.GetDemensionI()));
+//
+//	for (int i = 0; i < data.GetDemensionI(); i++)
+//		for (int j = 0; j < data.GetDemensionJ(); j++)
+//		{
+//			result[j][i] = data.Get(i, j);
+//		}
+//
+//	return MatrixClass(data.GetDemensionJ(), data.GetDemensionI(), result);
+//}

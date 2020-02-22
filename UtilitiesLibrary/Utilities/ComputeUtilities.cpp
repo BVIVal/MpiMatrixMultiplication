@@ -5,7 +5,7 @@
 MatrixClass* MatricesProduct(MatrixClass A, MatrixClass B, int commSize, int commRank)
 {
 	if (A.GetDemensionJ() != B.GetDemensionI()) return new MatrixClass;
-	
+
 	//auto indexes = GetVectorById(commRank, )
 	auto result = MultiplyMatrix(A, B, 1, 0);
 	//for (int i = 0; i < A.GetDemensionI(); i++)
@@ -21,13 +21,47 @@ MatrixClass* MatricesProduct(MatrixClass A, MatrixClass B, int commSize, int com
 	return result;
 }
 
-MatrixClass* MultiplyMatrix(MatrixClass A, MatrixClass B, const int commSize = 1, const int commRank = 0)
+MatrixClass* MultiplyMatrix(MatrixClass A, MatrixClass B, const int commSize, const int commRank)
 {
+	if (A.GetDemensionJ() != B.GetDemensionI()) throw runtime_error("Impossible to multiply matrices");
 	auto transposedB = MatrixClass::Transpose(B);
-	auto C = new MatrixClass(A.GetDemensionJ(), B.GetDemensionI(), {});
-	for (int i = commRank; i < A.GetDemensionI(); i+=commSize)
-		for (int j = 0; j < transposedB.GetDemensionJ(); j++)
+	auto C = new MatrixClass(ComputeMatrixCapacityByRank(A.GetDemensionI(), commSize, commRank), B.GetDemensionJ());
+	for (int i = commRank, z = 0; i < A.GetDemensionI(); i += commSize, z += 1)
+		for (int j = 0; j < transposedB.GetDemensionI(); j++)
 			for (int k = 0; k < A.GetDemensionJ(); k++)
-				C->Set(i, j, C->Get(i,j) + A.Get(i, k) + B.Get(j, k));
+				C->Set(i - (commRank + z * (commSize - 1)), j, 
+					C->Get(i - (commRank + z * (commSize - 1)), j) + A.Get(i, k) * transposedB.Get(j, k));
 	return C;
 }
+
+bool AreVectorsEqual(vector<vector<double>> matrixA, vector<vector<double>> matrixB, double measurementError)
+{
+	for (size_t i = 0; i < matrixA.size(); i++)
+	{
+		for (size_t j = 0; j < matrixA[0].size(); j++)
+		{
+			if (fabs((matrixA[i][j] - matrixB[i][j])) > measurementError) 	return false;
+		}
+	}
+	return true;
+}
+
+vector<vector<double>> ComputeDelta(vector<vector<double>> matrixA, vector<vector<double>> matrixB)
+{
+	auto deltaResult = vector<vector<double>>(matrixA.size(), vector<double>(matrixA[0].size()));
+
+	for (size_t i = 0; i < matrixA.size(); i++)
+	{
+		for (size_t j = 0; j < matrixA[0].size(); j++)
+		{
+			deltaResult[i][j] = fabs((matrixA[i][j] - matrixB[i][j]));
+		}
+	}
+	return deltaResult;
+}
+
+int ComputeMatrixCapacityByRank(int rowsNumber, int commSize, int commRank)
+{
+	return (((rowsNumber - commRank) - 1) / commSize) + 1;
+}
+

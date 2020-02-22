@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\Utilities">
-      <UniqueIdentifier>{82e013d2-99dc-4e7b-8d66-f308d5a9e05e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\Utilities">
-      <UniqueIdentifier>{1d1dcd4d-47b8-4870-a872-9ce4a077cc57}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\Data">
       <UniqueIdentifier>{37d2c96c-424e-4bcd-add5-2a0e777a69ed}</UniqueIdentifier>
     </Filter>
@@ -26,24 +20,6 @@
   <ItemGroup>
     <ClCompile Include="MpiMatrixMultiplication.cpp">
       <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\InputUtilities.cpp">
-      <Filter>Исходные файлы\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\FileUtilities.cpp">
-      <Filter>Исходные файлы\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\StringUtilities.cpp">
-      <Filter>Исходные файлы\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\MpiUtilities.cpp">
-      <Filter>Исходные файлы\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\ComputeUtilities.cpp">
-      <Filter>Исходные файлы\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\MatrixUtilities.cpp">
-      <Filter>Исходные файлы\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,25 +29,5 @@
     <None Include="Data\EntryMatrixDouble2.dat">
       <Filter>Исходные файлы\Data</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Utilities\InputUtilities.h">
-      <Filter>Файлы заголовков\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\MatrixUtilities.h">
-      <Filter>Файлы заголовков\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\FileUtilities.h">
-      <Filter>Файлы заголовков\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\StringUtilities.h">
-      <Filter>Файлы заголовков\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\MpiUtilities.h">
-      <Filter>Файлы заголовков\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\ComputeUtilities.h">
-      <Filter>Файлы заголовков\Utilities</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

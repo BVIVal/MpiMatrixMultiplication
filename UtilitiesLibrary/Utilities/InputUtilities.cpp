@@ -97,9 +97,9 @@ Create new vector<uint32_t> of indexes, using process-rank, max value of vector,
  * @return
  * New vector<uint32_t>;
  */
-vector<uint32_t> GetVectorById(int taskId, int vectorSize, int commSize)
+vector<int> GetVectorById(int taskId, int vectorSize, int commSize)
 {
-	vector<uint32_t> newVector;
+	vector<int> newVector;
 	for (int i = taskId; i < vectorSize; i = i + commSize) newVector.push_back(i);
 	return newVector;
 }
