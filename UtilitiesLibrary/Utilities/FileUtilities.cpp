@@ -30,15 +30,18 @@ bool IsFileClosedSuccessfully(ofstream* file)
 //ToDo: Is it wrong implementation? Do I need a destructor? Or better use std::move()?
 ofstream* CreateNewFile(const string& path, const string& name, bool reCreateIfAlreadyExists)
 {
+	ios_base::openmode ofstreamMode = ios::trunc;
 	auto fullPath = ToRawStringPath(path) + ToRawStringPath("\\" + name);
 
 	if (!reCreateIfAlreadyExists)
 	{
-		if (FileExists(fullPath)) throw "File with Name: " + name + " already exists\n by Path: " + path;
+		if (FileExists(fullPath)) ofstreamMode = ios::app;
+		else ofstreamMode = ios::trunc;
 	}
-	auto fileStream = new ofstream(fullPath);
+	
+	auto fileStream = new ofstream(fullPath, ofstreamMode);
 
-	if (!IsFileOpen(fileStream)) throw "File not created!\n Name: " + name + "\n Path: " + path;
+	if (!IsFileOpen(fileStream)) throw runtime_error("File not created!\n Name: " + name + "\n Path: " + path);
 	return fileStream;
 }
 
@@ -48,9 +51,9 @@ bool IsFileOpen(ofstream* file)
 	return false;
 }
 
+//ToDo: to do over generic type
 bool TryWriteToFile(ofstream* file, const vector<uint32_t>& values)
 {
-
 	if (file->is_open())
 	{
 		for (auto& value : values)
@@ -59,7 +62,7 @@ bool TryWriteToFile(ofstream* file, const vector<uint32_t>& values)
 			{
 				*file << value << endl;
 			}
-			catch (exception e)
+			catch (...)
 			{
 				return false;
 			}
@@ -70,6 +73,30 @@ bool TryWriteToFile(ofstream* file, const vector<uint32_t>& values)
 
 	return false;
 }
+
+//ToDo: to do over generic type
+bool TryWriteToFile(ofstream* file, const vector<double>& values)
+{
+	if (file->is_open())
+	{
+		try
+		{
+			
+			for (auto& value : values)
+			{
+				*file << value << " ";
+			}
+			*file << endl;
+		}
+		catch (...)
+		{
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
+
 
 /**
  * Creating full-path to the object using project-path.

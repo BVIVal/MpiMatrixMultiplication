@@ -15,6 +15,7 @@ bool IsFileClosedSuccessfully(ofstream* file);
 ofstream* CreateNewFile(const string& path, const string& name, bool reCreateIfAlreadyExists);
 bool IsFileOpen(ofstream* file);
 bool TryWriteToFile(ofstream* file, const vector<uint32_t>& values);
+bool TryWriteToFile(ofstream* file, const vector<double>& values);
 string GetFilePath(const string& path, const string& fileName, const string subFolder);
 string GetFileApplicationPath(const string& fileName, string subFolder);
 ifstream GetReadStream(const string& filePath);
