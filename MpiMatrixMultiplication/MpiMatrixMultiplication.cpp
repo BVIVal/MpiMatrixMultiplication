@@ -184,29 +184,57 @@ int main(int argc, char** argv)
 			{94974.608, 3645537.952, 236257.84, 22113.71, 79614.71, 2442460.747, 75842929.302, 375530.31, 46895.07, 59953.09},
 			{2315.9, 147259.88, 4521.48, 730.5, 5618.15, 21882.72, 142851.38, 6091.21, 478.06, 1226.63}
 		};
-		auto testSendVector = vector<double>
-		{73451.81, 4923380.33, 9692.156, 7442.93, 186244.586, 552449.77, 504410.97, 6926.479, 9358.76, 5337.97};
+		auto testSendVector = vector<vector<double>>
+		{
+			{73451.81, 4923380.33, 9692.156, 7442.93, 186244.586, 552449.77, 504410.97, 6926.479, 9358.76, 5337.97},
+			{637.29, 21007.97, 6199.1, 6775.47, 1664.35, 10953.99, 28967.01, 4165.8, 362.143, 5164.45}
+		};
 		
 		MPI_Datatype vectorOfDoubles;
-		auto numberOfBlocks = 10;//ten values in one vector
-		auto blockLength = 1;// one double-value
-		auto stride = 1; // space between values
+		auto numberOfBlocks = 1;//ten values in one vector
+		auto blockLength = 10;// one double-value
+		auto stride = 0; // space between values
 		MPI_Type_vector(numberOfBlocks, blockLength, stride, MPI_DOUBLE, &vectorOfDoubles);
 		MPI_Type_commit(&vectorOfDoubles);
 
-		vector<double> testVector = vector<double>(10);
+		//auto testVector = vector<vector<double>>(10, vector<double>(10));
+		//auto testVector = vector<double>(10);
+		vector<double> testVector;
+		auto rBufVector = vector<double>(20);
+		
 
+		auto bufferTest = (double*)malloc(size * stride * sizeof(double));
 		if(taskId == 0)
 		{
-			//MPI_Send(&testSendVector, 1, vectorOfDoubles, 1, 99, MPI_COMM_WORLD);
-			MPI_Send(&testSendVector[0], 1, vectorOfDoubles, 1, 99, MPI_COMM_WORLD);
+			testVector = testSendVector[0];
 		}
-		else if(taskId == 1)
+		if (taskId == 1)
 		{
-			MPI_Recv(&testVector[0], 1, vectorOfDoubles, 0, 99, MPI_COMM_WORLD, &status1);
-			auto file = CreateNewFile(RESULT_FILE_PATH, "TestVectorOverMPI.txt", false);
-			TryWriteToFile(file, testVector);
+			testVector = testSendVector[1];
 		}
+		
+		MPI_Gather(testVector.data(), 1, vectorOfDoubles, rBufVector.data(), 1, vectorOfDoubles, 0, MPI_COMM_WORLD);
+		if (taskId == 0) 
+		{
+			auto file = CreateNewFile(RESULT_FILE_PATH, "TestVectorOverMPI.txt", false);
+			TryWriteToFile(file, rBufVector);
+		}
+			
+		//if(taskId == 0)
+		//{
+		//	//MPI_Send(&testSendVector, 1, vectorOfDoubles, 1, 99, MPI_COMM_WORLD);
+		//	MPI_Send(&testSendVector[0][0], 1, vectorOfDoubles, 1, 99, MPI_COMM_WORLD);
+		//}
+		//else if(taskId == 1)
+		//{
+		//	MPI_Recv(&testVector[0][0], 1, vectorOfDoubles, 0, 99, MPI_COMM_WORLD, &status1);
+		//	auto file = CreateNewFile(RESULT_FILE_PATH, "TestVectorOverMPI.txt", false);
+		//	for (auto vector : testVector)
+		//	{
+		//		TryWriteToFile(file, vector);
+		//	}
+		//	
+		//}
 	}
 	catch (const char* msg)
 	{
