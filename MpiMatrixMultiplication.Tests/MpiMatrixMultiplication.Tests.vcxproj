@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileUtilities.Test.cpp" />
     <ClCompile Include="MpiMatrixMultiplication.Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
