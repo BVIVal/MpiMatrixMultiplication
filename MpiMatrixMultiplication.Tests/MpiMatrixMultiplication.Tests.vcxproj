@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="FileUtilities.Test.cpp" />
     <ClCompile Include="MpiMatrixMultiplication.Tests.cpp" />
+    <ClCompile Include="VectorUtilities.Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UtilitiesLibrary\UtilitiesLibrary.vcxproj">

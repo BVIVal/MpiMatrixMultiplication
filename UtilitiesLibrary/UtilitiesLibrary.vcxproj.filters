@@ -39,6 +39,9 @@
     <ClInclude Include="Utilities\StringUtilities.h">
       <Filter>Файлы заголовков\Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Utilities\VectorUtilities.h">
+      <Filter>Файлы заголовков\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utilities\ComputeUtilities.cpp">
@@ -57,6 +60,9 @@
       <Filter>Исходные файлы\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Utilities\StringUtilities.cpp">
+      <Filter>Исходные файлы\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\VectorUtilities.cpp">
       <Filter>Исходные файлы\Utilities</Filter>
     </ClCompile>
   </ItemGroup>

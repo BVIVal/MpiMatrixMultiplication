@@ -154,6 +154,7 @@
     <ClInclude Include="Utilities\MatrixUtilities.h" />
     <ClInclude Include="Utilities\MpiUtilities.h" />
     <ClInclude Include="Utilities\StringUtilities.h" />
+    <ClInclude Include="Utilities\VectorUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utilities\ComputeUtilities.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Utilities\MatrixUtilities.cpp" />
     <ClCompile Include="Utilities\MpiUtilities.cpp" />
     <ClCompile Include="Utilities\StringUtilities.cpp" />
+    <ClCompile Include="Utilities\VectorUtilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
