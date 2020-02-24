@@ -7,5 +7,6 @@
 using namespace std;
 
 void MpiErrorExit(string msg);
+MPI_Datatype CreateMpiVectorTypeOfDoubles(int numberOfBlocks, int blockLength, int stride);
 
 #endif // MPIUTILITIES_H
