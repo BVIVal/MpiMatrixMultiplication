@@ -52,7 +52,7 @@ bool IsFileOpen(ofstream* file)
 }
 
 //ToDo: to do over generic type
-bool TryWriteToFile(ofstream* file, const vector<uint32_t>& values)
+bool TryWriteToFile(ofstream* file, const vector<int>& values)
 {
 	if (file->is_open())
 	{
