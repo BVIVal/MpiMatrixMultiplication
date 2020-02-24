@@ -34,6 +34,7 @@ MatrixClass* MultiplyMatrix(MatrixClass A, MatrixClass B, const int commSize, co
 	return C;
 }
 
+//ToDo: to do it over generics
 bool AreVectorsEqual(vector<vector<double>> matrixA, vector<vector<double>> matrixB, double measurementError)
 {
 	if ((matrixA.size() != matrixB.size()) || (matrixA[0].size() != matrixB[0].size())) return false;
@@ -47,6 +48,7 @@ bool AreVectorsEqual(vector<vector<double>> matrixA, vector<vector<double>> matr
 	return true;
 }
 
+//ToDo: to do it over generics
 bool AreVectorsEqual(vector<double> matrixA, vector<double> matrixB, double measurementError)
 {
 	if (matrixA.size() != matrixB.size()) return false;
