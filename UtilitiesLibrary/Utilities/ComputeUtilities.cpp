@@ -36,12 +36,23 @@ MatrixClass* MultiplyMatrix(MatrixClass A, MatrixClass B, const int commSize, co
 
 bool AreVectorsEqual(vector<vector<double>> matrixA, vector<vector<double>> matrixB, double measurementError)
 {
+	if ((matrixA.size() != matrixB.size()) || (matrixA[0].size() != matrixB[0].size())) return false;
 	for (size_t i = 0; i < matrixA.size(); i++)
 	{
 		for (size_t j = 0; j < matrixA[0].size(); j++)
 		{
-			if (fabs((matrixA[i][j] - matrixB[i][j])) > measurementError) 	return false;
+			if (fabs((matrixA[i][j] - matrixB[i][j])) > measurementError) return false;
 		}
+	}
+	return true;
+}
+
+bool AreVectorsEqual(vector<double> matrixA, vector<double> matrixB, double measurementError)
+{
+	if (matrixA.size() != matrixB.size()) return false;
+	for (size_t i = 0; i < matrixA.size(); i++)
+	{
+		if(fabs((matrixA[i] - matrixB[i])) > measurementError) return false;
 	}
 	return true;
 }
@@ -63,5 +74,16 @@ vector<vector<double>> ComputeDelta(vector<vector<double>> matrixA, vector<vecto
 int ComputeMatrixCapacityByRank(int rowsNumber, int commSize, int commRank)
 {
 	return (((rowsNumber - commRank) - 1) / commSize) + 1;
+}
+
+int ComputeMaxMatrixCapacity(int rowsNumber, int commSize)
+{
+	int maxCapacity = -1;
+	for(int i = 0; i < commSize; i++)
+	{
+		auto variable = ComputeMatrixCapacityByRank(rowsNumber, commSize, i);
+		if(maxCapacity < variable) maxCapacity = variable;
+	}
+	return maxCapacity;
 }
 
