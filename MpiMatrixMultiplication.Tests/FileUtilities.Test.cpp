@@ -25,7 +25,7 @@ namespace MpiMatrixMultiplicationTests
 			{
 				file = CreateNewFile(RESULT_FILE_PATH, "MpiTryWriteVectorTest.txt", false);
 			}
-			catch (runtime_error& e)
+			catch (runtime_error&)
 			{
 				//File cann't exist or already open
 				Assert::Fail();

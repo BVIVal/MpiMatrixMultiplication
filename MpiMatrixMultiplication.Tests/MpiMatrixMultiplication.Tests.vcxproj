@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FileUtilities.Test.cpp" />
+    <ClCompile Include="MatrixUtilities.Tests.cpp" />
     <ClCompile Include="MpiMatrixMultiplication.Tests.cpp" />
     <ClCompile Include="VectorUtilities.Test.cpp" />
   </ItemGroup>
