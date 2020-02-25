@@ -6,8 +6,6 @@
 #include <Windows.h>
 #include "StringUtilities.h"
 
-
-
 using namespace std;
 
 bool FileExists(const string& filename);
@@ -16,6 +14,7 @@ ofstream* CreateNewFile(const string& path, const string& name, bool reCreateIfA
 bool IsFileOpen(ofstream* file);
 bool TryWriteToFile(ofstream* file, const vector<int>& values);
 bool TryWriteToFile(ofstream* file, const vector<double>& values);
+bool TryWriteToFile(ofstream* file, const vector<vector<double>>& values);
 string GetFilePath(const string& path, const string& fileName, const string subFolder);
 string GetFileApplicationPath(const string& fileName, string subFolder);
 ifstream GetReadStream(const string& filePath);

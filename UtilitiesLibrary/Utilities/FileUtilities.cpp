@@ -1,8 +1,5 @@
 #include "FileUtilities.h"
 
-
-
-// Function: FileExists
 /**
     Check if a file exists
 @param[in] filename - the name of the file to check
@@ -97,6 +94,30 @@ bool TryWriteToFile(ofstream* file, const vector<double>& values)
 	return false;
 }
 
+//ToDo: to do over generic type
+bool TryWriteToFile(ofstream* file, const vector<vector<double>>& values)
+{
+	if (file->is_open())
+	{
+		try
+		{
+			for (auto row : values)
+			{
+				for (auto& value : row)
+				{
+					*file << value << " ";
+				}
+				*file << endl;
+			}
+		}
+		catch (...)
+		{
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
 
 /**
  * Creating full-path to the object using project-path.
