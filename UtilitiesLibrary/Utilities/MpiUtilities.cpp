@@ -25,3 +25,13 @@ MPI_Datatype CreateMpiVectorTypeOfDoubles(int numberOfBlocks, int blockLength, i
 	MPI_Type_commit(&vectorOfDoubles);
 	return vectorOfDoubles;
 }
+
+double StartTimer()
+{
+    return MPI_Wtime();
+}
+
+double StopTimer(double startPoint)
+{
+    return MPI_Wtime() - startPoint;
+}

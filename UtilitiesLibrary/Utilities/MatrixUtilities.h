@@ -57,6 +57,8 @@ public:
 
 	static MatrixClass Transpose(MatrixClass data);
 
+	static MatrixClass FromMpiGatherVectorToMatrixClass(vector<double> gatherVector, vector<int> capacityDemensionI, int demensionJ);
+
 };
 
 #endif

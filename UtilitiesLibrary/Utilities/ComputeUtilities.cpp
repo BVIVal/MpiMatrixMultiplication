@@ -1,26 +1,5 @@
 #include "ComputeUtilities.h"
 
-
-
-MatrixClass* MatricesProduct(MatrixClass A, MatrixClass B, int commSize, int commRank)
-{
-	if (A.GetDemensionJ() != B.GetDemensionI()) return new MatrixClass;
-
-	//auto indexes = GetVectorById(commRank, )
-	auto result = MultiplyMatrix(A, B, 1, 0);
-	//for (int i = 0; i < A.GetDemensionI(); i++)
-	//	for (int k = 0; k < A.GetDemensionJ(); k++)
-	//		for (int j = 0; j < B.GetDemensionJ(); j++)
-	//			C->Set(i, j, A.Get(i, k) + B.Get(k, j));
-	///*for (i = 0; i < SIZE; i++) {
-	//	for (j = 0; j < SIZE; j++) {
-	//		for (k = 0; k < SIZE; k++)
-	//			c[i][j] = c[i][j] + a[i][k] * b[j][k];
-	//	}
-	//}*/
-	return result;
-}
-
 MatrixClass* MultiplyMatrix(MatrixClass A, MatrixClass B, const int commSize, const int commRank)
 {
 	if (A.GetDemensionJ() != B.GetDemensionI()) throw runtime_error("Impossible to multiply matrices");
@@ -88,4 +67,5 @@ int ComputeMaxMatrixCapacity(int rowsNumber, int commSize)
 	}
 	return maxCapacity;
 }
+
 

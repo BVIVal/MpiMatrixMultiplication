@@ -1,4 +1,5 @@
 #include "MatrixUtilities.h"
+#include "VectorUtilities.h"
 
 #pragma region Constructor
 
@@ -93,15 +94,22 @@ MatrixClass MatrixClass::Transpose(MatrixClass data)
 	return MatrixClass(data.GetDemensionJ(), data.GetDemensionI(), result);
 }
 
-//MatrixClass MatrixClass::MatrixConcotonateByCommSize(MatrixClass data)
-//{
-//	vector<vector<double>> result(data.GetDemensionJ(), vector<double>(data.GetDemensionI()));
-//
-//	for (int i = 0; i < data.GetDemensionI(); i++)
-//		for (int j = 0; j < data.GetDemensionJ(); j++)
-//		{
-//			result[j][i] = data.Get(i, j);
-//		}
-//
-//	return MatrixClass(data.GetDemensionJ(), data.GetDemensionI(), result);
-//}
+MatrixClass MatrixClass::FromMpiGatherVectorToMatrixClass(vector<double> gatherVector, vector<int> capacityDemensionI, int demensionJ)
+{
+	auto demensionI = Sum(capacityDemensionI);
+	auto numIterations = gatherVector.size();
+	auto maxDemensionI = Max(capacityDemensionI);
+	
+	auto resultVector = vector<vector<double>>(demensionI, vector<double>(demensionJ));
+
+	for (int i = 0; i < demensionI; i++)
+	{
+
+		resultVector[i] = GetVectorElements(gatherVector, (maxDemensionI * demensionJ * i) % (numIterations - demensionJ), demensionJ);
+
+	}
+
+	
+	return MatrixClass(resultVector.size(), resultVector[0].size(), resultVector);
+}
+

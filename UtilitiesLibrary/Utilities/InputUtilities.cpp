@@ -78,7 +78,7 @@ MatrixClass FromFile(const string& path, const string& fileName, const string& s
 		throw runtime_error("Unknown error in FromFile");
 	}
 	
-	if (!binaryFile.is_open()) return MatrixClass().CreateEmptyMatrixClass();
+	if (!binaryFile.is_open()) return MatrixClass();
 
 	int i = GetIntValue(binaryFile);
 	int j = GetIntValue(binaryFile);
